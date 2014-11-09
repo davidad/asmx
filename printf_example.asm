@@ -1,11 +1,4 @@
-format ELF64
-include "syscalls.inc"
-public start
-
-extrn printf    ; extrn is copublic
-
-start:
-  and rsp, (not 1111b) ; for calling c fns, need to align rsp
+include "startp.inc"
   lea rdi, [msg]
   mov rsi, 42
   call printf
