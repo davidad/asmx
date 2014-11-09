@@ -3,8 +3,8 @@ include "startp.inc"
   mov rsi, 42
   call printf
 
-	xor	edi,edi
-	mov	eax, SYSCALL_EXIT
+	xor	edi,edi          ; 0 is arg for exit (ie success)
+	mov eax, SYSCALL_EXIT
 	syscall
 
 msg db 'The number is: %d',0xA,0x0
