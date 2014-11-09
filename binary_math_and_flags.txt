@@ -1,0 +1,27 @@
+127:   0111 1111
+ -1:   1111 1111
+[add:]
+    [1 0111 1110]
+subtract:
+(-128) 1000 0000
+    OF ^
+
+255:   1111 1111
+ +1:   0000 0001
+add:
+     1 0000 0000
+  CF ^
+OF is not set; only when most significant bit (sign) goes from 0 to 1, not from 1 to 0.
+CF is set because there's a new bit, but alternatively because it went from 1 to 0
+
+127:   0111 1111
+ +1:   0000 0001
+add:
+(128)  1000 0000
+    OF ^
+
+-1:    1111 1111
++2:    0000 0010
+add:
+     1 0000 0001
+  CF ^
