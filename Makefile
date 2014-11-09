@@ -1,5 +1,5 @@
 .PHONY: all
-all: hello64
+all: hello64 printf_example
 
 uname := $(shell uname)
 ifeq ($(uname),Darwin)
@@ -28,7 +28,7 @@ endif
 	rm -f syscalls.inc
 
 %.$(format).exe: %.$(format).o
-	ld `sdl2-config --libs` $< -o $@
+	ld -lc $< -o $@
 
 %.elf.exe: %.elf.o
 	/usr/local/gcc-4.8.1-for-linux64/bin/x86_64-pc-linux-ld $< -o $@
