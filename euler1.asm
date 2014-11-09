@@ -18,7 +18,7 @@ macro modtest divisor {
 
 include "startp.inc"
   mov iter, 999 
-  mov sum, 0
+  xor sum, sum
 subfizzbuzz:
   test iter, iter
   jz done
