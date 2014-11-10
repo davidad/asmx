@@ -3,6 +3,7 @@
 
 ; Find the largest palindrome made from the product of two 3-digit numbers.
 
+; ebx ecx
 ; 999 999
 ; 998 999
 ; 998 998
@@ -44,28 +45,30 @@ define product eax
 define digit   rbp
 define index1  r11
 define index2  rbp
+define decimal rdi
 
 include "startp.inc"
   mov esi, 1000
   mov ebx, esi       ; start 1 greater because dec immediately
   mov r10, 10        ; for div for palindrome check
-  lea rdi, [decimal] ; ptr to decimal rep in memory
+  lea decimal, [_decimal] ; ptr to decimal rep in memory
 .outer:
   dec ebx            ; starts at 999
   mov ecx, esi       ; set to 1000, will dec to 999
   .inner:
      cmp ebx, ecx
-     je  .outer
+     jge  .outer
      dec ecx         ; starts at 999 too
      ;; multiply ebx, ecx
      mov product, ebx
      mul ecx         ; result in product (eax)
      ;; make decimal representation
+     mov rsi, product ; for printf later because decimalrep clobbers product
      xor digit, digit
      .decimalrep:
        xor rdx, rdx  ; div works on rdx:rax
        div r10       ; div rax by 10
-       mov [rdi + 4*digit], edx ; mult by 4 because each num is 4 bytes
+       mov [4*digit + decimal], edx ; mult by 4 because each num is 4 bytes
        inc digit
        test eax, eax
        jnz .decimalrep
@@ -88,4 +91,5 @@ done:
   exit_0             ; from startp.inc
 
 msg db 'The largest palindrome that is the product of 3 digit nums is %d',0xA,0x0
-decimal rd 6  ; only up to 6 digits long
+section 'decimal' writable   ; make _decimal writeable and not executable
+_decimal rd 6  ; only up to 6 digits long
