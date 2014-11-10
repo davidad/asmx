@@ -25,3 +25,36 @@ add:
 add:
      1 0000 0001
   CF ^
+
+fib 9: 0000 1001
+max 8: 0000 1000
+negate 8:
+ [inv: 1111 0111]
+  [+1: 1111 1000]
+9 + -8:
+     1 0000 0001   
+  CF ^
+since this was a subtraction, CF is negated and is thus = 0.
+
+fib 7: 0000 0111
+   -8: 1111 1000
+subtract 8 from 7 (by adding -8):
+     0 1111 1111
+  CF ^
+since this was a subtraction, CF is negated and is thus = 1.
+
+
+TEST for evenness
+=================
+
+fib 7 :  0000 0111
+test 1:  0000 0001
+bitwise and:
+         0000 0001
+ZF = 0 because not all bits of result are 0
+
+fib 8:   0000 1000
+test 1:  0000 0001
+bitwise and:
+         0000 0000
+ZF = 1 because all bits of result are 0
