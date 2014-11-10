@@ -1,5 +1,6 @@
 format ELF64
 include "syscalls.inc"
+include "macros.inc"
 public start
 
 extrn printf    ; extrn is copublic
